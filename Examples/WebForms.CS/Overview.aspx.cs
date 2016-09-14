@@ -30,7 +30,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                     using (var videoThumbnailer = new VideoThumbnailer(videoPath))
                     using (var thumbnail = videoThumbnailer.GenerateThumbnail(300))
                         thumbnail.Save(thumbnailPath, ImageFormat.Jpeg);
-                }),
+                }).FilePath,
                 thumbnailCacheKey
             );
 

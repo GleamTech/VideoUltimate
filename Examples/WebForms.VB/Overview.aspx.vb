@@ -28,7 +28,7 @@ Public Class OverviewPage
                     thumbnail.Save(thumbnailPath, ImageFormat.Jpeg)
 		        End Using
 		        End Using
-            End Sub), 
+            End Sub).FilePath, 
             thumbnailCacheKey)
 
 		Using videoFrameReader = New VideoFrameReader(videoPath)
