@@ -71,8 +71,10 @@
     </Reference>
     <Reference Include="System"/>
     <Reference Include="System.Core"/>
+    <Reference Include="System.Data"/>
     <Reference Include="System.Drawing"/>
     <Reference Include="System.Web"/>
+    <Reference Include="System.Xml"/>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic"/>
@@ -100,6 +102,11 @@
     <Content Include="Descriptions\Overview.html"/>
     <Content Include="Overview.aspx"/>
     <Content Include="Global.asax"/>
+    <Content Include="Reading.aspx"/>
+    <Content Include="Resources\nouislider.min.css"/>
+    <Content Include="Resources\nouislider.min.js"/>
+    <Content Include="Resources\Table.css"/>
+    <Content Include="Resources\TimeSlider.js"/>
     <Content Include="Web.config"/>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -144,6 +151,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reading.aspx.designer.vb">
+      <DependentUpon>Reading.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reading.aspx.vb">
+      <DependentUpon>Reading.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

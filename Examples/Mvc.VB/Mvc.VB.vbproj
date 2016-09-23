@@ -98,11 +98,13 @@
     <Import Include="System.Web.UI.HtmlControls"/>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\HomeController.Reading.vb"/>
     <Compile Include="Controllers\HomeController.Overview.vb"/>
     <Compile Include="Controllers\HomeController.vb"/>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReadingViewModel.vb"/>
     <Compile Include="Models\OverviewViewModel.vb"/>
     <Compile Include="My Project\AssemblyInfo.vb"/>
     <Compile Include="My Project\Application.Designer.vb">
@@ -139,8 +141,13 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="Descriptions\Overview.html"/>
+    <Content Include="Resources\nouislider.min.css"/>
+    <Content Include="Resources\nouislider.min.js"/>
+    <Content Include="Resources\Table.css"/>
+    <Content Include="Resources\TimeSlider.js"/>
     <Content Include="Views\Home\Index.vbhtml"/>
     <Content Include="Views\Home\Overview.vbhtml"/>
+    <Content Include="Views\Home\Reading.vbhtml"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax"/>

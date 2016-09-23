@@ -16,6 +16,13 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                     Url = "Overview.aspx",
                     SourceFiles = new[] { "Overview.aspx", "Overview.aspx.cs"},
                     DescriptionFile = "Descriptions/Overview.html"
+                },
+                new Example
+                {
+                    Title = "Reading video frames",
+                    Url = "Reading.aspx",
+                    SourceFiles = new[] { "Reading.aspx", "Reading.aspx.cs"},
+                    DescriptionFile = "Descriptions/Reading.html"
                 }
             };
 

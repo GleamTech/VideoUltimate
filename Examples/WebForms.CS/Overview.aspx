@@ -6,32 +6,7 @@
 <html>
 <head runat="server">
     <title>Overview</title>
-    <style>
-        table.info {
-            background-color: white;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            margin-left: 20px;
-            float: left;
-            min-width: 100px;
-        }
-
-        table.info caption {
-            background-color: dodgerblue;
-            color: white;
-            font-weight: bold;
-            padding: 2px;
-        }
-
-        table.info th, 
-        table.info td {
-            text-align: left;
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        table.info tr:nth-child(even){background-color: #f2f2f2}
-    </style>
+    <link href="<%=ExamplesCoreConfiguration.GetVersionedUrl("~/resources/table.css")%>" rel="stylesheet" />
 </head>
 <body style="margin: 20px;">
 

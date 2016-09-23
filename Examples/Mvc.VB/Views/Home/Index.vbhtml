@@ -10,6 +10,12 @@
                 .Url = "home/Overview",
                 .SourceFiles = New String() {"Views/Home/Overview.vbhtml", "Controllers/HomeController.Overview.vb"},
                 .DescriptionFile = "Descriptions/Overview.html"
+            },
+            New Example() With {
+                .Title = "Reading video frames",
+                .Url = "home/Reading",
+                .SourceFiles = New String() {"Views/Home/Reading.vbhtml", "Controllers/HomeController.Reading.vb"},
+                .DescriptionFile = "Descriptions/Reading.html"
             }
         },
         .ExampleProjectName = "ASP.NET MVC (VB)",
