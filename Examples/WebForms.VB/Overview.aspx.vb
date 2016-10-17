@@ -1,8 +1,8 @@
 ﻿Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
+Imports GleamTech.Caching
 Imports GleamTech.ExamplesCore
-Imports GleamTech.Util
 Imports GleamTech.VideoUltimate
 Imports GleamTech.Web
 
@@ -19,17 +19,17 @@ Public Class OverviewPage
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 		Dim videoPath = exampleFileSelector.SelectedFile
 		Dim fileInfo = New FileInfo(videoPath)
-		Dim thumbnailCacheKey = ThumbnailCache.GenerateCacheKey(fileInfo.Extension, fileInfo.Length, fileInfo.LastWriteTimeUtc)
+		Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Extension, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
 
 		ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
-            ThumbnailCache.GetOrAdd(thumbnailCacheKey + ".jpg", Sub(thumbnailPath) 
+            ThumbnailCache.GetOrAdd(thumbnailCacheKey, Sub(thumbnailPath) 
 		        Using videoThumbnailer = New VideoThumbnailer(videoPath)
 		        Using thumbnail = videoThumbnailer.GenerateThumbnail(300)
                     thumbnail.Save(thumbnailPath, ImageFormat.Jpeg)
 		        End Using
 		        End Using
             End Sub).FilePath, 
-            thumbnailCacheKey)
+            thumbnailCacheKey.FullValue)
 
 		Using videoFrameReader = New VideoFrameReader(videoPath)
 			VideoInfo.Add("Duration", videoFrameReader.Duration.ToString())
