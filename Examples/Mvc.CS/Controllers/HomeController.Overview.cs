@@ -27,7 +27,7 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
 
             var videoPath = model.ExampleFileSelector.SelectedFile;
             var fileInfo = new FileInfo(videoPath);
-            var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Extension, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
+            var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
 
             model.ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
                 ThumbnailCache.GetOrAdd(thumbnailCacheKey, thumbnailPath =>

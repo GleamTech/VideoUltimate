@@ -26,7 +26,7 @@ Namespace Controllers
 
 		    Dim videoPath = model.ExampleFileSelector.SelectedFile
 		    Dim fileInfo = New FileInfo(videoPath)
-		    Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Extension, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
+		    Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
 
 		    model.ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
                 ThumbnailCache.GetOrAdd(thumbnailCacheKey, Sub(thumbnailPath) 

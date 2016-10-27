@@ -19,7 +19,7 @@ Public Class OverviewPage
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 		Dim videoPath = exampleFileSelector.SelectedFile
 		Dim fileInfo = New FileInfo(videoPath)
-		Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Extension, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
+		Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
 
 		ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
             ThumbnailCache.GetOrAdd(thumbnailCacheKey, Sub(thumbnailPath) 

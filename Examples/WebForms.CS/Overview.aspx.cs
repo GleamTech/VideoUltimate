@@ -22,7 +22,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
         {
             var videoPath = exampleFileSelector.SelectedFile;
             var fileInfo = new FileInfo(videoPath);
-            var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Extension, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
+            var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
 
             ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
                 ThumbnailCache.GetOrAdd(thumbnailCacheKey, thumbnailPath =>
