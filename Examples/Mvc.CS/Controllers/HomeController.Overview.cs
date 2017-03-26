@@ -4,6 +4,7 @@ using System.IO;
 using System.Web.Mvc;
 using GleamTech.Caching;
 using GleamTech.ExamplesCore;
+using GleamTech.IO;
 using GleamTech.VideoUltimate;
 using GleamTech.VideoUltimateExamples.Mvc.CS.Models;
 using GleamTech.Web;
@@ -30,7 +31,7 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
             var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
 
             model.ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
-                ThumbnailCache.GetOrAdd(thumbnailCacheKey, thumbnailPath =>
+                ThumbnailCache.GetOrAdd(thumbnailCacheKey, (BackSlashPath thumbnailPath) =>
                 {
                     using (var videoThumbnailer = new VideoThumbnailer(videoPath))
                     using (var thumbnail = videoThumbnailer.GenerateThumbnail(300))

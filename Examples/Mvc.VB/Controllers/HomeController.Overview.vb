@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.IO
 Imports GleamTech.Caching
 Imports GleamTech.ExamplesCore
+Imports GleamTech.IO
 Imports GleamTech.VideoUltimate
 Imports GleamTech.VideoUltimateExamples.Mvc.VB.Models
 Imports GleamTech.Web
@@ -29,13 +30,13 @@ Namespace Controllers
 		    Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
 
 		    model.ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
-                ThumbnailCache.GetOrAdd(thumbnailCacheKey, Sub(thumbnailPath) 
-		            Using videoThumbnailer = New VideoThumbnailer(videoPath)
-		            Using thumbnail = videoThumbnailer.GenerateThumbnail(300)
-                        thumbnail.Save(thumbnailPath, ImageFormat.Jpeg)
-		            End Using
-		            End Using
-                End Sub).FilePath, 
+                ThumbnailCache.GetOrAdd(thumbnailCacheKey, CType(Sub(thumbnailPath) 
+                    Using videoThumbnailer = New VideoThumbnailer(videoPath)
+                        Using thumbnail = videoThumbnailer.GenerateThumbnail(300)
+                            thumbnail.Save(thumbnailPath, ImageFormat.Jpeg)
+                        End Using
+                    End Using
+                End Sub, Action(Of BackSlashPath))).FilePath, 
                 thumbnailCacheKey.FullValue)
 
 		    Using videoFrameReader = New VideoFrameReader(videoPath)
