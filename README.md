@@ -19,11 +19,21 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
 
     -   Add reference to **GleamTech.Core.dll** and **GleamTech.VideoUltimate.dll** found in "Bin" folder of VideoUltimate-vX.X.X.X.zip package which you already downloaded and extracted.
 
-    -   Or install NuGet package and add references automatically via NuGet Package Manager in Visual Studio: open **Tools -&gt; NuGet Package Manager -&gt; Package Manager Console** and run this command:
+    -   Or install NuGet package and add references automatically via NuGet Package Manager in Visual Studio: 
+        Go to **Tools -> NuGet Package Manager -> Package Manager Console** and run this command:
 
-        `Install-Package VideoUltimate`
+			`Install-Package VideoUltimate -Source https://get.gleamtech.com/nuget/default/`
 
-        If you prefer using the user interface when working with NuGet, you can also install the package this way: open **Tools -&gt; NuGet Package Manager -&gt; Manage NuGet Packages for Solution**, enter **VideoUltimate** in the search field, and click **Install** button on the found package.
+		If you prefer using the user interface when working with NuGet, you can also install the package this way:
+		
+			-  GleamTech has its own NuGet feed so first you need to add this feed to be able to find GleamTech's packages. 
+			    Go to **Tools -> NuGet Package Manager -> Package Manager Settings** and then click the **+** button to add a 
+			    new package source. Enter `GleamTech` in **Name** field and `https://get.gleamtech.com/nuget/default/` 
+			    in **Source** field and click **OK**.
+			    
+			-  Go to **Tools -> NuGet Package Manager -> Manage NuGet Packages for Solution**, select `GleamTech` or `All` 
+			   in the Package source dropdown on the top right. Now enter `VideoUltimate` in the search field, 
+			   and click **Install** button on the found package.
 
 2.  Set VideoUltimate's global configuration. For example, you may want to set the license key. Insert the following line into the ```Application_Start``` method of your **Global.asax.cs** for Web projects or Main method for other project types:
 
