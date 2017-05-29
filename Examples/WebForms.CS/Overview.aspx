@@ -21,8 +21,8 @@
     </table>
 
     <table class="info">
-        <caption>Video Info</caption>
-        <% foreach (var kvp in VideoInfo) {%>
+        <caption>Video Properties</caption>
+        <% foreach (var kvp in VideoInfo.Properties) {%>
         <tr>
             <th><%=kvp.Key%></th>
             <td><%=kvp.Value%></td>
@@ -32,7 +32,7 @@
     
     <table class="info">
         <caption>Video Metadata</caption>
-        <% foreach (var kvp in VideoMetadata) {%>
+        <% foreach (var kvp in VideoInfo.Metadata) {%>
         <tr>
             <th><%=kvp.Key%></th>
             <td><%=kvp.Value%></td>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using GleamTech.ExamplesCore;
+using GleamTech.VideoUltimate;
 
 namespace GleamTech.VideoUltimateExamples.WebForms.CS
 {
@@ -8,6 +9,8 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            exampleExplorer.VersionTitle = "v" + VideoUltimateConfiguration.AssemblyInfo.FileVersion;
+
             exampleExplorer.Examples = new ExampleBase[]
             {
                 new Example

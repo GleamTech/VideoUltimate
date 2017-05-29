@@ -31,48 +31,31 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                     {"frameTime", "0"}
                 });
 
+            var duration = GetDuration(videoPath);
+            TotalSeconds = ((int)duration.TotalSeconds).ToString(CultureInfo.InvariantCulture);
+        }
+
+        public static TimeSpan GetDuration(string videoPath)
+        {
             using (var videoFrameReader = new VideoFrameReader(videoPath))
             {
-                TotalSeconds = ((int)videoFrameReader.Duration.TotalSeconds).ToString(CultureInfo.InvariantCulture);
+                return videoFrameReader.Duration;
             }
         }
 
-        public static void DownloadVideoFrame(HttpContext context)
+        public static Bitmap GetFrame(string videoPath, double frameTime)
         {
-            var videoPath = ExamplesCoreConfiguration.UnprotectString(context.Request["videoPath"]);
-
-            Bitmap bitmap = null;
-
             using (var videoFrameReader = new VideoFrameReader(videoPath))
             {
-                var frameTime = int.Parse(context.Request["frameTime"]);
-
-                if (frameTime > 0) 
+                if (frameTime > 0)
                     videoFrameReader.Seek(frameTime);
 
-                //videoFrameReader.SetFrameWidth();
+                //videoFrameReader.SetFrameWidth(300);
 
                 if (videoFrameReader.Read())
-                    bitmap = videoFrameReader.GetFrame();
+                    return videoFrameReader.GetFrame();
 
-                if (bitmap == null)
-                    bitmap = GetErrorFrame(videoFrameReader.Width, videoFrameReader.Height, "Reading frame failed");
-            }
-
-
-            using (bitmap)
-            using (var stream = new MemoryStream())
-            {
-                bitmap.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-
-                var fileResponse = new FileResponse(context);
-                fileResponse.Transmit(
-                    stream,
-                    "frame.jpg",
-                    File.GetLastWriteTimeUtc(videoPath),
-                    stream.Length,
-                    neverExpires: true);
+                return GetErrorFrame(videoFrameReader.Width, videoFrameReader.Height, "Reading frame failed");
             }
         }
 
@@ -97,6 +80,27 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
             }
 
             return bitmap;
+        }
+
+        public static void DownloadVideoFrame(HttpContext context)
+        {
+            var videoPath = ExamplesCoreConfiguration.UnprotectString(context.Request["videoPath"]);
+            var frameTime = int.Parse(context.Request["frameTime"]);
+
+            using (var bitmap = GetFrame(videoPath, frameTime))
+            using (var stream = new MemoryStream())
+            {
+                bitmap.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+
+                var fileResponse = new FileResponse(context);
+                fileResponse.Transmit(
+                    stream,
+                    "frame.jpg",
+                    File.GetLastWriteTimeUtc(videoPath),
+                    stream.Length,
+                    neverExpires: true);
+            }
         }
 
         protected string FrameDownloaderHandlerName

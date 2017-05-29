@@ -1,10 +1,12 @@
 ﻿@using GleamTech.ExamplesCore
+@using GleamTech.VideoUltimate
 @using GleamTech.Web.Mvc
 @{
     var exampleExplorer = new ExampleExplorer
     {
         FullViewport = true,
         NavigationTitle = "VideoUltimate Examples",
+        VersionTitle = "v" + VideoUltimateConfiguration.AssemblyInfo.FileVersion,
         Examples = new ExampleBase[]
         {
             new Example

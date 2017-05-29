@@ -21,8 +21,8 @@
     </table>
 
     <table class="info">
-        <caption>Video Info</caption>
-        <%For Each kvp in VideoInfo%>
+        <caption>Video Properties</caption>
+        <%For Each kvp in VideoInfo.Properties%>
         <tr>
             <th><%=kvp.Key%></th>
             <td><%=kvp.Value%></td>
@@ -32,7 +32,7 @@
     
     <table class="info">
         <caption>Video Metadata</caption>
-        <%For Each kvp in VideoMetadata%>
+        <%For Each kvp in VideoInfo.Metadata%>
         <tr>
             <th><%=kvp.Key%></th>
             <td><%=kvp.Value%></td>

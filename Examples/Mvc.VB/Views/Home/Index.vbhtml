@@ -1,9 +1,11 @@
 ﻿@Imports GleamTech.ExamplesCore
 @Imports GleamTech.Web.Mvc
+@Imports GleamTech.VideoUltimate
 @Code
     Dim exampleExplorer = New ExampleExplorer() With {
         .FullViewport = True,
         .NavigationTitle = "VideoUltimate Examples",
+        .VersionTitle = "v" & VideoUltimateConfiguration.AssemblyInfo.FileVersion.ToString,
         .Examples = New ExampleBase() {
             New Example() With {
                 .Title = "Overview",

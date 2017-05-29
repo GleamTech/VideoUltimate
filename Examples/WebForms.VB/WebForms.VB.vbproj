@@ -61,13 +61,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Core">
-      <HintPath>..\packages\GleamTech.Core.1.8.5\lib\net40\GleamTech.Core.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Core.1.8.6\lib\net40\GleamTech.Core.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.ExamplesCore">
-      <HintPath>..\packages\GleamTech.ExamplesCore.1.7.2\lib\net40\GleamTech.ExamplesCore.dll</HintPath>
+      <HintPath>..\packages\GleamTech.ExamplesCore.1.8.0\lib\net40\GleamTech.ExamplesCore.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\VideoUltimate.1.4.2\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\VideoUltimate.1.4.3\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
     <Reference Include="System"/>
     <Reference Include="System.Core"/>
@@ -100,6 +100,7 @@
   <ItemGroup>
     <Content Include="Default.aspx"/>
     <Content Include="Descriptions\Overview.html"/>
+    <Content Include="Descriptions\Reading.html"/>
     <Content Include="Overview.aspx"/>
     <Content Include="Global.asax"/>
     <Content Include="Reading.aspx"/>

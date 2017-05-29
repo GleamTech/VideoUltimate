@@ -33,116 +33,116 @@ Namespace Controllers
 			        {"frameTime", "0"}
 		        })
 
-		    Using videoFrameReader = New VideoFrameReader(videoPath)
-			    model.TotalSeconds = CInt(Int(videoFrameReader.Duration.TotalSeconds)).ToString(CultureInfo.InvariantCulture)
-		    End Using
+            Dim duration = GetDuration(videoPath)
+            model.TotalSeconds = CInt(Int(duration.TotalSeconds)).ToString(CultureInfo.InvariantCulture)
 
             Return View(model)
         End Function
 
-	Public Shared Sub DownloadVideoFrame(context As HttpContext)
-		Dim videoPath = ExamplesCoreConfiguration.UnprotectString(context.Request("videoPath"))
+        Public Shared Function GetDuration(videoPath As String) As TimeSpan
+            Using videoFrameReader = New VideoFrameReader(videoPath)
+                Return videoFrameReader.Duration
+            End Using
+        End Function
 
-		Dim bitmap As Bitmap = Nothing
+        Public Shared Function GetFrame(videoPath As String, frameTime As Double) As Bitmap
+            Using videoFrameReader = New VideoFrameReader(videoPath)
+                If frameTime > 0 Then
+                    videoFrameReader.Seek(frameTime)
+                End If
 
-		Using videoFrameReader = New VideoFrameReader(videoPath)
-			Dim frameTime = Integer.Parse(context.Request("frameTime"))
+                'videoFrameReader.SetFrameWidth(300);
 
-			If frameTime > 0 Then
-				videoFrameReader.Seek(frameTime)
-			End If
+                If videoFrameReader.Read() Then
+                    Return videoFrameReader.GetFrame()
+                End If
 
-			'videoFrameReader.SetFrameWidth();
+                Return GetErrorFrame(videoFrameReader.Width, videoFrameReader.Height, "Reading frame failed")
+            End Using
+        End Function
 
-			If videoFrameReader.Read() Then
-				bitmap = videoFrameReader.GetFrame()
-			End If
+        Public Shared Function GetErrorFrame(width As Integer, height As Integer, [error] As String) As Bitmap
+            Dim bitmap = New Bitmap(width, height)
 
-			If bitmap Is Nothing Then
-				bitmap = GetErrorFrame(videoFrameReader.Width, videoFrameReader.Height, "Reading frame failed")
-			End If
-		End Using
+            Using _graphics = Graphics.FromImage(bitmap)
+                _graphics.Clear(Color.Black)
 
+                _graphics.DrawString(
+                    [error], 
+                    New Font(FontFamily.GenericSansSerif, 12), 
+                    New SolidBrush(Color.White), 
+                    New RectangleF(0, 0, width, height), 
+                    New StringFormat() With { 
+                                        .Alignment = StringAlignment.Center, 
+                                        .LineAlignment = StringAlignment.Center 
+                                        })
+            End Using
 
-		Using bitmap
-			Using stream = New MemoryStream()
-				bitmap.Save(stream, ImageFormat.Jpeg)
-				stream.Position = 0
+            Return bitmap
+        End Function
 
-				Dim fileResponse = New FileResponse(context)
-				fileResponse.Transmit(
-                    stream, 
-                    "frame.jpg", 
-                    System.IO.File.GetLastWriteTimeUtc(videoPath), 
-                    stream.Length, 
-                    neverExpires := True)
-			End Using
-		End Using
-	End Sub
+        Public Shared Sub DownloadVideoFrame(context As HttpContext)
+            Dim videoPath = ExamplesCoreConfiguration.UnprotectString(context.Request("videoPath"))
+            Dim frameTime = Integer.Parse(context.Request("frameTime"))
 
-	Public Shared Function GetErrorFrame(width As Integer, height As Integer, [error] As String) As Bitmap
-		Dim bitmap = New Bitmap(width, height)
+            Using bitmap = GetFrame(videoPath, frameTime)
+                Using stream = New MemoryStream()
+                    bitmap.Save(stream, ImageFormat.Jpeg)
+                    stream.Position = 0
 
-		Using _graphics = Graphics.FromImage(bitmap)
-			_graphics.Clear(Color.Black)
+                    Dim fileResponse = New FileResponse(context)
+                    fileResponse.Transmit(
+                        stream, "frame.jpg", 
+                        System.IO.File.GetLastWriteTimeUtc(videoPath), 
+                        stream.Length, 
+                        neverExpires := True)
+                End Using
+            End Using
+        End Sub
 
-			_graphics.DrawString(
-                [error], 
-                New Font(FontFamily.GenericSansSerif, 12), 
-                New SolidBrush(Color.White), 
-                New RectangleF(0, 0, width, height), 
-                New StringFormat() With { 
-				    .Alignment = StringAlignment.Center, 
-				    .LineAlignment = StringAlignment.Center 
-			    })
-		End Using
+        Protected ReadOnly Property FrameDownloaderHandlerName As String
+	        Get
+		        If _frameDownloaderHandlerName Is Nothing Then
+			        _frameDownloaderHandlerName = "FrameDownloader"
+			        ExamplesCoreConfiguration.RegisterDynamicDownloadHandler(_frameDownloaderHandlerName, AddressOf DownloadVideoFrame)
+		        End If
 
-		Return bitmap
-	End Function
+		        Return _frameDownloaderHandlerName
+	        End Get
+        End Property
+        Private Shared _frameDownloaderHandlerName As String
 
-    Protected ReadOnly Property FrameDownloaderHandlerName As String
-	    Get
-		    If _frameDownloaderHandlerName Is Nothing Then
-			    _frameDownloaderHandlerName = "FrameDownloader"
-			    ExamplesCoreConfiguration.RegisterDynamicDownloadHandler(_frameDownloaderHandlerName, AddressOf DownloadVideoFrame)
-		    End If
+	    Protected ReadOnly Property PageCssBundle As ResourceBundle
+		    Get
+			    If _pageCssBundle Is Nothing Then
+				    _pageCssBundle = New ResourceBundle("page.css") From {
+					    Server.MapPath("~/resources/nouislider.min.css"), 
+                        Server.MapPath("~/resources/table.css")
+				    }
 
-		    Return _frameDownloaderHandlerName
-	    End Get
-    End Property
-    Private Shared _frameDownloaderHandlerName As String
+				    ResourceManager.Register(_pageCssBundle)
+			    End If
 
-	Protected ReadOnly Property PageCssBundle As ResourceBundle
-		Get
-			If _pageCssBundle Is Nothing Then
-				_pageCssBundle = New ResourceBundle("page.css") From {
-					Server.MapPath("~/resources/nouislider.min.css"), 
-                    Server.MapPath("~/resources/table.css")
-				}
+			    Return _pageCssBundle
+		    End Get
+	    End Property
+	    Private Shared _pageCssBundle As ResourceBundle
 
-				ResourceManager.Register(_pageCssBundle)
-			End If
+	    Protected ReadOnly Property PageJsBundle As ResourceBundle
+		    Get
+			    If _pageJsBundle Is Nothing Then
+				    _pageJsBundle = New ResourceBundle("page.js") From {
+					    Server.MapPath("~/resources/nouislider.min.js"),
+					    Server.MapPath("~/resources/timeslider.js")
+				    }
 
-			Return _pageCssBundle
-		End Get
-	End Property
-	Private Shared _pageCssBundle As ResourceBundle
+				    ResourceManager.Register(_pageJsBundle)
+			    End If
 
-	Protected ReadOnly Property PageJsBundle As ResourceBundle
-		Get
-			If _pageJsBundle Is Nothing Then
-				_pageJsBundle = New ResourceBundle("page.js") From {
-					Server.MapPath("~/resources/nouislider.min.js"),
-					Server.MapPath("~/resources/timeslider.js")
-				}
-
-				ResourceManager.Register(_pageJsBundle)
-			End If
-
-			Return _pageJsBundle
-		End Get
-	End Property
-	Private Shared _pageJsBundle As ResourceBundle
+			    Return _pageJsBundle
+		    End Get
+	    End Property
+	    Private Shared _pageJsBundle As ResourceBundle
 
     End Class
 End Namespace

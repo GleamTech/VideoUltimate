@@ -53,14 +53,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Core">
-      <HintPath>..\packages\GleamTech.Core.1.8.5\lib\net40\GleamTech.Core.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Core.1.8.6\lib\net40\GleamTech.Core.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.ExamplesCore">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GleamTech.ExamplesCore.1.7.2\lib\net40\GleamTech.ExamplesCore.dll</HintPath>
+      <HintPath>..\packages\GleamTech.ExamplesCore.1.8.0\lib\net40\GleamTech.ExamplesCore.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\VideoUltimate.1.4.2\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\VideoUltimate.1.4.3\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing"/>
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Models\ReadingViewModel.vb"/>
     <Compile Include="Models\OverviewViewModel.vb"/>
+    <Compile Include="Models\VideoInfoModel.vb"/>
     <Compile Include="My Project\AssemblyInfo.vb"/>
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -167,6 +168,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="Descriptions\Overview.html"/>
+    <Content Include="Descriptions\Reading.html"/>
     <Content Include="Resources\nouislider.min.css"/>
     <Content Include="Resources\nouislider.min.js"/>
     <Content Include="Resources\Table.css"/>
