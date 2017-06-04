@@ -11,10 +11,8 @@ Namespace Controllers
     Partial Public Class HomeController
         Inherits Controller
 
-	    Private Shared ReadOnly ThumbnailCache As New DiskCache() With {
-	        .Path = HostingPathHelper.MapPath("~/App_Data/ThumbnailCache")
-	    }
-
+	    Private Shared ReadOnly ThumbnailCache As New DiskCache(HostingPathHelper.MapPath("~/App_Data/ThumbnailCache").ToString())
+	    
 	    Private Shared Sub GetAndSaveThumbnail(videoPath As String, thumbnailPath As String)
 	        Using videoThumbnailer = New VideoThumbnailer(videoPath)
 	            Using thumbnail = videoThumbnailer.GenerateThumbnail(300)

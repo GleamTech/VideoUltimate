@@ -15,7 +15,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
     {
         protected string ThumbnailUrl;
         protected VideoInfoModel VideoInfo;
-        private static readonly DiskCache ThumbnailCache = new DiskCache { Path = HostingPathHelper.MapPath("~/App_Data/ThumbnailCache")};
+        private static readonly DiskCache ThumbnailCache = new DiskCache(HostingPathHelper.MapPath("~/App_Data/ThumbnailCache").ToString());
 
         private static void GetAndSaveThumbnail(string videoPath, string thumbnailPath)
         {

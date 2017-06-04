@@ -12,7 +12,7 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
 {
     public partial class HomeController
     {
-        private static readonly DiskCache ThumbnailCache = new DiskCache { Path = HostingPathHelper.MapPath("~/App_Data/ThumbnailCache") };
+        private static readonly DiskCache ThumbnailCache = new DiskCache(HostingPathHelper.MapPath("~/App_Data/ThumbnailCache").ToString());
 
         private static void GetAndSaveThumbnail(string videoPath, string thumbnailPath)
         {
