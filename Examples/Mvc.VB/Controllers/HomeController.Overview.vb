@@ -2,7 +2,7 @@
 Imports System.Globalization
 Imports System.IO
 Imports GleamTech.Caching
-Imports GleamTech.ExamplesCore
+Imports GleamTech.Examples
 Imports GleamTech.VideoUltimate
 Imports GleamTech.VideoUltimateExamples.Mvc.VB.Models
 Imports GleamTech.Web
@@ -59,7 +59,7 @@ Namespace Controllers
 		    Dim fileInfo = New FileInfo(videoPath)
 		    Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
 
-		    model.ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
+		    model.ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
                 ThumbnailCache.GetOrAdd(
                     thumbnailCacheKey,                 
                     Sub(thumbnailPath)

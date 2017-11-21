@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using GleamTech.ExamplesCore;
+using GleamTech.Examples;
 using GleamTech.VideoUltimate;
 
 namespace GleamTech.VideoUltimateExamples.WebForms.CS
@@ -30,7 +30,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
             };
 
             exampleExplorer.ExampleProjectName = "ASP.NET Web Forms (C#)";
-            exampleExplorer.ExampleProjects = ExamplesCoreConfiguration.LoadExampleProjects(Server.MapPath("~/App_Data/ExampleProjects.json"));
+            exampleExplorer.ExampleProjects = ExamplesConfiguration.LoadExampleProjects(Server.MapPath("~/App_Data/ExampleProjects.json"));
         }
     }
 }

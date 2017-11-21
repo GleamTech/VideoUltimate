@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Web;
 using System.Web.UI;
-using GleamTech.ExamplesCore;
+using GleamTech.Examples;
 using GleamTech.VideoUltimate;
 using GleamTech.Web;
 
@@ -22,11 +22,11 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
             var videoPath = exampleFileSelector.SelectedFile;
             var fileInfo = new FileInfo(videoPath);
 
-            FrameDownloaderUrl = ExamplesCoreConfiguration.GetDynamicDownloadUrl(
+            FrameDownloaderUrl = ExamplesConfiguration.GetDynamicDownloadUrl(
                 FrameDownloaderHandlerName,
                 new NameValueCollection
                 {
-                    {"videoPath", ExamplesCoreConfiguration.ProtectString(videoPath)},
+                    {"videoPath", ExamplesConfiguration.ProtectString(videoPath)},
                     {"version", fileInfo.LastWriteTimeUtc.Ticks + "-" +  fileInfo.Length},
                     {"frameTime", "0"}
                 });
@@ -84,7 +84,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
 
         public static void DownloadVideoFrame(HttpContext context)
         {
-            var videoPath = ExamplesCoreConfiguration.UnprotectString(context.Request["videoPath"]);
+            var videoPath = ExamplesConfiguration.UnprotectString(context.Request["videoPath"]);
             var frameTime = int.Parse(context.Request["frameTime"]);
 
             using (var bitmap = GetFrame(videoPath, frameTime))
@@ -110,7 +110,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                 if (frameDownloaderHandlerName == null)
                 {
                     frameDownloaderHandlerName = "FrameDownloader";
-                    ExamplesCoreConfiguration.RegisterDynamicDownloadHandler(frameDownloaderHandlerName, DownloadVideoFrame);
+                    ExamplesConfiguration.RegisterDynamicDownloadHandler(frameDownloaderHandlerName, DownloadVideoFrame);
                 }
 
                 return frameDownloaderHandlerName;

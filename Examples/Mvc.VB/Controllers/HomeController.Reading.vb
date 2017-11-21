@@ -2,7 +2,7 @@
 Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
-Imports GleamTech.ExamplesCore
+Imports GleamTech.Examples
 Imports GleamTech.VideoUltimate
 Imports GleamTech.VideoUltimateExamples.Mvc.VB.Models
 Imports GleamTech.Web
@@ -25,10 +25,10 @@ Namespace Controllers
 		    Dim videoPath = model.ExampleFileSelector.SelectedFile
 		    Dim fileInfo = New FileInfo(videoPath)
 
-		    model.FrameDownloaderUrl = ExamplesCoreConfiguration.GetDynamicDownloadUrl(
+		    model.FrameDownloaderUrl = ExamplesConfiguration.GetDynamicDownloadUrl(
                 FrameDownloaderHandlerName, 
                 New NameValueCollection() From {
-			        {"videoPath", ExamplesCoreConfiguration.ProtectString(videoPath)},
+			        {"videoPath", ExamplesConfiguration.ProtectString(videoPath)},
 			        {"version", fileInfo.LastWriteTimeUtc.Ticks.ToString() + "-" + fileInfo.Length.ToString()},
 			        {"frameTime", "0"}
 		        })
@@ -82,7 +82,7 @@ Namespace Controllers
         End Function
 
         Public Shared Sub DownloadVideoFrame(context As HttpContext)
-            Dim videoPath = ExamplesCoreConfiguration.UnprotectString(context.Request("videoPath"))
+            Dim videoPath = ExamplesConfiguration.UnprotectString(context.Request("videoPath"))
             Dim frameTime = Integer.Parse(context.Request("frameTime"))
 
             Using bitmap = GetFrame(videoPath, frameTime)
@@ -104,7 +104,7 @@ Namespace Controllers
 	        Get
 		        If _frameDownloaderHandlerName Is Nothing Then
 			        _frameDownloaderHandlerName = "FrameDownloader"
-			        ExamplesCoreConfiguration.RegisterDynamicDownloadHandler(_frameDownloaderHandlerName, AddressOf DownloadVideoFrame)
+			        ExamplesConfiguration.RegisterDynamicDownloadHandler(_frameDownloaderHandlerName, AddressOf DownloadVideoFrame)
 		        End If
 
 		        Return _frameDownloaderHandlerName

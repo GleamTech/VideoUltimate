@@ -5,7 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Web.UI;
 using GleamTech.Caching;
-using GleamTech.ExamplesCore;
+using GleamTech.Examples;
 using GleamTech.VideoUltimate;
 using GleamTech.Web;
 
@@ -55,7 +55,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
             var fileInfo = new FileInfo(videoPath);
             var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
 
-            ThumbnailUrl = ExamplesCoreConfiguration.GetDownloadUrl(
+            ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
                 ThumbnailCache.GetOrAdd(
                     thumbnailCacheKey, 
                     thumbnailPath => GetAndSaveThumbnail(videoPath, thumbnailPath)
