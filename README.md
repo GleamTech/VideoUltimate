@@ -22,22 +22,22 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
     -   Or install NuGet package and add references automatically via NuGet Package Manager in Visual Studio: 
         Go to **Tools -> NuGet Package Manager -> Package Manager Console** and run this command:
 
-			`Install-Package VideoUltimate -Source https://get.gleamtech.com/nuget/default/`
+        `Install-Package VideoUltimate -Source https://get.gleamtech.com/nuget/default/`
 
-		If you prefer using the user interface when working with NuGet, you can also install the package this way:
+        If you prefer using the user interface when working with NuGet, you can also install the package this way:
 		
-			-  GleamTech has its own NuGet feed so first you need to add this feed to be able to find GleamTech's packages. 
-			    Go to **Tools -> NuGet Package Manager -> Package Manager Settings** and then click the **+** button to add a 
+        - Â GleamTech has its own NuGet feed so first you need to add this feed to be able to find GleamTech's packages. 
+           Go to **Tools -> NuGet Package Manager -> Package Manager Settings** and then click the **+** button to add a 
 			    new package source. Enter `GleamTech` in **Name** field and `https://get.gleamtech.com/nuget/default/` 
 			    in **Source** field and click **OK**.
 			    
-			-  Go to **Tools -> NuGet Package Manager -> Manage NuGet Packages for Solution**, select `GleamTech` or `All` 
+        -  Go to **Tools -> NuGet Package Manager -> Manage NuGet Packages for Solution**, select `GleamTech` or `All` 
 			   in the Package source dropdown on the top right. Now enter `VideoUltimate` in the search field, 
 			   and click **Install** button on the found package.
 
 2.  Set VideoUltimate's global configuration. For example, you may want to set the license key. Insert the following line into the ```Application_Start``` method of your **Global.asax.cs** for Web projects or Main method for other project types:
 
-    ```
+    ```c#
     //Set this property only if you have a valid license key, otherwise do not
     //set it so VideoUltimate runs in trial mode.
     VideoUltimateConfiguration.Current.LicenseKey = "QQJDJLJP34...";
@@ -45,7 +45,7 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
 
     Alternatively you can specify the configuration in ```<appSettings>``` tag of your Web.config.
 
-    ```
+    ```xml
     <appSettings>
       <add key="VideoUltimate:LicenseKey" value="QQJDJLJP34..." />
     </appSettings>
@@ -55,13 +55,13 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
 
 3.  Open one of your class files (eg. Program.cs) and at the top of your file add ```GleamTech.VideoUltimate``` namespace:
 
-    ```
+    ```c#
     using GleamTech.VideoUltimate;
     ```
 
     Now in some method insert these lines:
 
-    ```
+    ```c#
     using (var videoFrameReader = new VideoFrameReader(@"C:\Video.mp4"))
     {
         if (videoFrameReader.Read())
@@ -76,7 +76,7 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
 
     Sometimes you may only need to quickly generate a meaningful thumbnail for a video, you can use VideoThumbnailer class for this:
 
-    ```
+    ```c#
     using (var videoThumbnailer = new VideoThumbnailer(@"C:\Video.mp4"))
     using (var thumbnail = videoThumbnailer.GenerateThumbnail(100))
         thumbnail.Save(@"C:\Thumbnail1.jpg", ImageFormat.Jpeg);    
