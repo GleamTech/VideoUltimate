@@ -62,10 +62,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Core">
-      <HintPath>..\packages\GleamTech.Core.2.0.0\lib\net40\GleamTech.Core.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Core.2.0.1\lib\net40\GleamTech.Core.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\VideoUltimate.1.6.0\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\VideoUltimate.1.7.0\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
     <Reference Include="System"/>
     <Reference Include="System.Core"/>
