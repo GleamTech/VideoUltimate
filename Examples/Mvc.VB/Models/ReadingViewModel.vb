@@ -1,5 +1,5 @@
-﻿Imports GleamTech.Examples
-Imports GleamTech.Web
+﻿Imports GleamTech.AspNet
+Imports GleamTech.Examples
 
 Namespace Models
 

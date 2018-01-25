@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Reading.aspx.cs" Inherits="GleamTech.VideoUltimateExamples.WebForms.CS.ReadingPage" %>
 <%@ Register TagPrefix="GleamTech" Namespace="GleamTech.Examples" Assembly="GleamTech.Core" %>
-<%@ Import Namespace="GleamTech.Web" %>
+<%@ Import Namespace="GleamTech.AspNet" %>
 
 <!DOCTYPE html>
 
@@ -14,7 +14,7 @@
 </head>
 <body style="margin: 20px;">
 
-    <GleamTech:ExampleFileSelector ID="exampleFileSelector" runat="server"
+    <GleamTech:ExampleFileSelectorControl ID="exampleFileSelector" runat="server"
         InitialFile="MP4 Video.mp4" />
     
     <table class="info" style="min-width: 300px;">

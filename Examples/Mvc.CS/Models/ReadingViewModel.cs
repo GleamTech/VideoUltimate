@@ -1,5 +1,5 @@
-﻿using GleamTech.Examples;
-using GleamTech.Web;
+﻿using GleamTech.AspNet;
+using GleamTech.Examples;
 
 namespace GleamTech.VideoUltimateExamples.Mvc.CS.Models
 {

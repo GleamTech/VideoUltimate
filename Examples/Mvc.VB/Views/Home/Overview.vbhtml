@@ -1,5 +1,5 @@
-﻿@Imports GleamTech.Examples
-@Imports GleamTech.Web.Mvc
+﻿@Imports GleamTech.AspNet.Mvc
+@Imports GleamTech.Examples
 @ModelType GleamTech.VideoUltimateExamples.Mvc.VB.Models.OverviewViewModel
 
 <!DOCTYPE html>
@@ -9,9 +9,9 @@
     <title>Overview</title>
     <link href="@ExamplesConfiguration.GetVersionedUrl("~/resources/table.css")" rel="stylesheet" />
 </head>
-<body style="margin: 20px;" >
+<body style="margin: 20px;">
 
-    @Html.RenderControl(Model.ExampleFileSelector)
+    @Me.RenderBody(Model.ExampleFileSelector)
 
     <table class="info">
         <caption>Smart Thumbnail</caption>
@@ -23,20 +23,20 @@
     <table class="info">
         <caption>Video Properties</caption>
         @For Each kvp In Model.VideoInfo.Properties
-        @<tr>
-            <th>@kvp.Key</th>
-            <td>@kvp.Value</td>
-        </tr>
+            @<tr>
+                <th>@kvp.Key</th>
+                <td>@kvp.Value</td>
+            </tr>
         Next
     </table>
 
     <table class="info">
         <caption>Video Metadata</caption>
         @For Each kvp In Model.VideoInfo.Metadata
-        @<tr>
-            <th>@kvp.Key</th>
-            <td>@kvp.Value</td>
-        </tr>
+            @<tr>
+                <th>@kvp.Key</th>
+                <td>@kvp.Value</td>
+            </tr>
         Next
     </table>
 

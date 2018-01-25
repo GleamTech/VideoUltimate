@@ -6,11 +6,13 @@
 <html>
 <head runat="server">
     <title>Overview</title>
-    <link href="<%=ExamplesConfiguration.GetVersionedUrl("~/resources/table.css")%>" rel="stylesheet" />
+    <asp:PlaceHolder runat="server">
+        <link href="<%=ExamplesConfiguration.GetVersionedUrl("~/resources/table.css")%>" rel="stylesheet" />
+    </asp:PlaceHolder>
 </head>
 <body style="margin: 20px;">
 
-    <GleamTech:ExampleFileSelector ID="exampleFileSelector" runat="server"
+    <GleamTech:ExampleFileSelectorControl ID="exampleFileSelector" runat="server"
         InitialFile="MP4 Video.mp4" />
     
     <table class="info">

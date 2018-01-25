@@ -1,5 +1,5 @@
-﻿@using GleamTech.Web
-@using GleamTech.Web.Mvc
+﻿@using GleamTech.AspNet
+@using GleamTech.AspNet.Mvc
 @model GleamTech.VideoUltimateExamples.Mvc.CS.Models.ReadingViewModel
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 </head>
 <body style="margin: 20px;">
 
-    @Html.RenderControl(Model.ExampleFileSelector)
+    @this.RenderBody(Model.ExampleFileSelector)
 
     <table class="info" style="min-width: 300px;">
         <caption>Current Frame</caption>

@@ -4,10 +4,10 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Web.UI;
+using GleamTech.AspNet;
 using GleamTech.Caching;
 using GleamTech.Examples;
 using GleamTech.VideoUltimate;
-using GleamTech.Web;
 
 namespace GleamTech.VideoUltimateExamples.WebForms.CS
 {

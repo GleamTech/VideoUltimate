@@ -8,6 +8,6 @@
     <title>VideoUltimate Examples - ASP.NET Web Forms (C#)</title>
 </head>
     <body>
-        <GleamTech:ExampleExplorer ID="exampleExplorer" FullViewport="True" NavigationTitle="VideoUltimate Examples" runat="server" />
+        <GleamTech:ExampleExplorerControl ID="exampleExplorer" DisplayMode="Viewport" NavigationTitle="VideoUltimate Examples" runat="server" />
     </body>
 </html>

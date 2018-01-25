@@ -2,11 +2,11 @@
 using System.Globalization;
 using System.IO;
 using System.Web.Mvc;
+using GleamTech.AspNet;
 using GleamTech.Caching;
 using GleamTech.Examples;
 using GleamTech.VideoUltimate;
 using GleamTech.VideoUltimateExamples.Mvc.CS.Models;
-using GleamTech.Web;
 
 namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
 {
@@ -52,7 +52,7 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
             {
                 ExampleFileSelector = new ExampleFileSelector
                 {
-                    ID = "exampleFileSelector",
+                    Id = "exampleFileSelector",
                     InitialFile = "MP4 Video.mp4"
                 }
             };

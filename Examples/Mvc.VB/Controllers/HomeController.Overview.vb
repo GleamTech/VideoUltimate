@@ -1,11 +1,11 @@
 ﻿Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
+Imports GleamTech.AspNet
 Imports GleamTech.Caching
 Imports GleamTech.Examples
 Imports GleamTech.VideoUltimate
 Imports GleamTech.VideoUltimateExamples.Mvc.VB.Models
-Imports GleamTech.Web
 
 Namespace Controllers
     Partial Public Class HomeController
@@ -50,7 +50,7 @@ Namespace Controllers
 
             Dim model = New OverviewViewModel() With { _
 	            .ExampleFileSelector = New ExampleFileSelector() With {
-		            .ID = "exampleFileSelector",
+		            .Id = "exampleFileSelector",
 		            .InitialFile = "MP4 Video.mp4"
 	            }
             }

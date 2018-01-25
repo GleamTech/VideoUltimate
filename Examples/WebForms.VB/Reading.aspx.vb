@@ -2,9 +2,9 @@
 Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
+Imports GleamTech.AspNet
 Imports GleamTech.Examples
 Imports GleamTech.VideoUltimate
-Imports GleamTech.Web
 
 Public Class ReadingPage
     Inherits Page
