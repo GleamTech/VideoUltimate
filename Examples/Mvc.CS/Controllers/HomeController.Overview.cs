@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using GleamTech.AspNet;
 using GleamTech.Caching;
 using GleamTech.Examples;
+using GleamTech.IO;
 using GleamTech.VideoUltimate;
 using GleamTech.VideoUltimateExamples.Mvc.CS.Models;
 
@@ -12,13 +13,14 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
 {
     public partial class HomeController
     {
-        private static readonly DiskCache ThumbnailCache = new DiskCache(HostingPathHelper.MapPath("~/App_Data/ThumbnailCache").ToString());
+        private static readonly ForwardSlashPath ThumbnailCachePath = "~/App_Data/ThumbnailCache";
+        private static readonly FileCache ThumbnailCache = new FileCache(ThumbnailCachePath.ToString());
 
-        private static void GetAndSaveThumbnail(string videoPath, string thumbnailPath)
+        private static void GetAndSaveThumbnail(string videoPath, Stream thumbnailStream)
         {
             using (var videoThumbnailer = new VideoThumbnailer(videoPath))
             using (var thumbnail = videoThumbnailer.GenerateThumbnail(300))
-                thumbnail.Save(thumbnailPath, ImageFormat.Jpeg);
+                thumbnail.Save(thumbnailStream, ImageFormat.Jpeg);
         }
 
         private static VideoInfoModel GetVideoInfo(string videoPath)
@@ -59,13 +61,14 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
 
             var videoPath = model.ExampleFileSelector.SelectedFile;
             var fileInfo = new FileInfo(videoPath);
-            var thumbnailCacheKey = new DiskCacheKey(new DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
+            var thumbnailCacheKey = new FileCacheKey(new FileCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
+            var cacheItem = ThumbnailCache.GetOrAdd(
+                thumbnailCacheKey,
+                thumbnailStream => GetAndSaveThumbnail(videoPath, thumbnailStream)
+            );
 
             model.ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
-                ThumbnailCache.GetOrAdd(
-                    thumbnailCacheKey,
-                    thumbnailPath => GetAndSaveThumbnail(videoPath, thumbnailPath)
-                ).FilePath,
+                HostingPathHelper.MapPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
                 thumbnailCacheKey.FullValue
             );
 

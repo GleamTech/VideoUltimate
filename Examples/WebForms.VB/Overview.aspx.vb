@@ -4,6 +4,7 @@ Imports System.IO
 Imports GleamTech.AspNet
 Imports GleamTech.Caching
 Imports GleamTech.Examples
+Imports GleamTech.IO
 Imports GleamTech.VideoUltimate
 
 Public Class OverviewPage
@@ -11,12 +12,13 @@ Public Class OverviewPage
 
 	Protected ThumbnailUrl As String
 	Protected VideoInfo As VideoInfoModel
-	Private Shared ReadOnly ThumbnailCache As New DiskCache(HostingPathHelper.MapPath("~/App_Data/ThumbnailCache").ToString())
+	Private Shared readonly ThumbnailCachePath As ForwardSlashPath = "~/App_Data/ThumbnailCache"
+	Private Shared ReadOnly ThumbnailCache As New FileCache(ThumbnailCachePath.ToString())
 
-	Private Shared Sub GetAndSaveThumbnail(videoPath As String, thumbnailPath As String)
+	Private Shared Sub GetAndSaveThumbnail(videoPath As String, thumbnailStream As Stream)
 	    Using videoThumbnailer = New VideoThumbnailer(videoPath)
 	        Using thumbnail = videoThumbnailer.GenerateThumbnail(300)
-	            thumbnail.Save(thumbnailPath, ImageFormat.Jpeg)
+	            thumbnail.Save(thumbnailStream, ImageFormat.Jpeg)
 	        End Using
 	    End Using
 	End Sub
@@ -49,16 +51,16 @@ Public Class OverviewPage
 	Protected Sub Page_Load(sender As Object, e As EventArgs)
 	    Dim videoPath = exampleFileSelector.SelectedFile
 	    Dim fileInfo = New FileInfo(videoPath)
-	    Dim thumbnailCacheKey = New DiskCacheKey(New DiskCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
+	    Dim thumbnailCacheKey = New FileCacheKey(New FileCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg")
+	    Dim cacheItem = ThumbnailCache.GetOrAdd(
+	        thumbnailCacheKey, 
+	        Sub(thumbnailStream) GetAndSaveThumbnail(videoPath, thumbnailStream)
+	    )
 
         ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
-            ThumbnailCache.GetOrAdd(
-                thumbnailCacheKey, 
-                Sub(thumbnailPath)
-                    GetAndSaveThumbnail(videoPath, thumbnailPath)
-                End Sub
-            ).FilePath,
-            thumbnailCacheKey.FullValue)
+            HostingPathHelper.MapPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
+            thumbnailCacheKey.FullValue
+        )
 
         VideoInfo = GetVideoInfo(videoPath)
 	End Sub
