@@ -43,12 +43,10 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
     VideoUltimateConfiguration.Current.LicenseKey = "QQJDJLJP34...";
     ```
 
-    Alternatively you can specify the configuration in ```<appSettings>``` tag of your Web.config.
+    Alternatively you can specify the configuration in ```<appSettings>``` tag of your Web.config (or App.exe.config).
 
     ```xml
-    <appSettings>
-      <add key="VideoUltimate:LicenseKey" value="QQJDJLJP34..." />
-    </appSettings>
+    <add key="VideoUltimate:LicenseKey" value="QQJDJLJP34..." />
     ```
 
     As you would notice, ```VideoUltimate:``` prefix maps to ```VideoUltimateConfiguration.Current```.
@@ -64,9 +62,13 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
     ```c#
     using (var videoFrameReader = new VideoFrameReader(@"C:\Video.mp4"))
     {
-        if (videoFrameReader.Read())
+        if (videoFrameReader.Read()) //Only if frame was read successfully
         {
+            //Get a System.Drawing.Bitmap for the current frame
+            //You are responsible for disposing the bitmap when you are finished with it.
+            //So it's good practice to have a "using" statement for the retrieved bitmap.
             using (var frame = videoFrameReader.GetFrame())
+                //Reference System.Drawing and use System.Drawing.Imaging namespace for the following line.
                 frame.Save(@"C:\Frame1.jpg", ImageFormat.Jpeg);
         }
     }
@@ -78,6 +80,11 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer libra
 
     ```c#
     using (var videoThumbnailer = new VideoThumbnailer(@"C:\Video.mp4"))
+    //Generate a meaningful thumbnail of the video and
+    //get a System.Drawing.Bitmap with 100x100 maximum size.
+    //You are responsible for disposing the bitmap when you are finished with it.
+    //So it's good practice to have a "using" statement for the retrieved bitmap.
     using (var thumbnail = videoThumbnailer.GenerateThumbnail(100))
-        thumbnail.Save(@"C:\Thumbnail1.jpg", ImageFormat.Jpeg);    
+        //Reference System.Drawing and use System.Drawing.Imaging namespace for the following line.
+        thumbnail.Save(@"C:\Thumbnail1.jpg", ImageFormat.Jpeg);
     ```
