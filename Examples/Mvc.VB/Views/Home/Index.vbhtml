@@ -9,13 +9,13 @@
         .Examples = New ExampleBase() {
             New Example() With {
                 .Title = "Overview",
-                .Url = "home/Overview",
+                .Url = "Home/Overview",
                 .SourceFiles = New String() {"Views/Home/Overview.vbhtml", "Controllers/HomeController.Overview.vb"},
                 .DescriptionFile = "Descriptions/Overview.html"
             },
             New Example() With {
                 .Title = "Reading video frames",
-                .Url = "home/Reading",
+                .Url = "Home/Reading",
                 .SourceFiles = New String() {"Views/Home/Reading.vbhtml", "Controllers/HomeController.Reading.vb"},
                 .DescriptionFile = "Descriptions/Reading.html"
             }
