@@ -4,34 +4,46 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Web.UI;
 using GleamTech.AspNet;
 using GleamTech.Examples;
 using GleamTech.VideoUltimate;
+using GleamTech.VideoUltimateExamples.AspNetCore.CS.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace GleamTech.VideoUltimateExamples.WebForms.CS
+namespace GleamTech.VideoUltimateExamples.AspNetCore.CS.Controllers
 {
-    public partial class ReadingPage : Page
+    public partial class HomeController
     {
-        protected string TotalSeconds;
-        protected string FrameDownloaderUrl;
-
-        protected void Page_Load(object sender, EventArgs e)
+        public IActionResult Reading()
         {
-            var videoPath = exampleFileSelector.SelectedFile;
+            var model = new ReadingViewModel
+            {
+                PageCssBundle = PageCssBundle,
+                PageJsBundle = PageJsBundle,
+                ExampleFileSelector = new ExampleFileSelector
+                {
+                    Id = "exampleFileSelector",
+                    InitialFile = "MP4 Video.mp4"
+                }
+            };
+
+            var videoPath = model.ExampleFileSelector.SelectedFile;
             var fileInfo = new FileInfo(videoPath);
 
-            FrameDownloaderUrl = ExamplesConfiguration.GetDynamicDownloadUrl(
+            model.FrameDownloaderUrl = ExamplesConfiguration.GetDynamicDownloadUrl(
                 FrameDownloaderHandlerName,
                 new NameValueCollection
                 {
                     {"videoPath", ExamplesConfiguration.ProtectString(videoPath)},
-                    {"version", fileInfo.LastWriteTimeUtc.Ticks + "-" +  fileInfo.Length},
+                    {"version", fileInfo.LastWriteTimeUtc.Ticks + "-" + fileInfo.Length},
                     {"frameTime", "0"}
                 });
 
+
             var duration = GetDuration(videoPath);
-            TotalSeconds = ((int)duration.TotalSeconds).ToString(CultureInfo.InvariantCulture);
+            model.TotalSeconds = ((int)duration.TotalSeconds).ToString(CultureInfo.InvariantCulture);
+
+            return View(model);
         }
 
         public static TimeSpan GetDuration(string videoPath)
@@ -68,7 +80,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
 
                 graphics.DrawString(
                     error,
-                    new Font(FontFamily.GenericSansSerif, 12), 
+                    new Font(FontFamily.GenericSansSerif, 12),
                     new SolidBrush(Color.White),
                     new RectangleF(0, 0, width, height),
                     new StringFormat
@@ -96,7 +108,7 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                 fileResponse.Transmit(
                     stream,
                     "frame.jpg",
-                    File.GetLastWriteTimeUtc(videoPath),
+                    System.IO.File.GetLastWriteTimeUtc(videoPath),
                     stream.Length,
                     neverExpires: true);
             }
@@ -125,8 +137,8 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                 {
                     pageCssBundle = new ResourceBundle("page.css")
                     {
-                        Server.MapPath("~/resources/nouislider.min.css"),
-                        Server.MapPath("~/resources/table.css")
+                        Hosting.ResolvePhysicalPath("~/resources/nouislider.min.css"),
+                        Hosting.ResolvePhysicalPath("~/resources/table.css")
                     };
 
                     ResourceManager.Register(pageCssBundle);
@@ -145,8 +157,8 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                 {
                     pageJsBundle = new ResourceBundle("page.js")
                     {
-                        Server.MapPath("~/resources/nouislider.min.js"),
-                        Server.MapPath("~/resources/timeslider.js")
+                        Hosting.ResolvePhysicalPath("~/resources/nouislider.min.js"),
+                        Hosting.ResolvePhysicalPath("~/resources/timeslider.js")
                     };
 
                     ResourceManager.Register(pageJsBundle);

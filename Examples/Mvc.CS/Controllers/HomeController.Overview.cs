@@ -68,7 +68,7 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
             );
 
             model.ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
-                HostingPathHelper.MapPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
+                Hosting.ResolvePhysicalPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
                 thumbnailCacheKey.FullValue
             );
 

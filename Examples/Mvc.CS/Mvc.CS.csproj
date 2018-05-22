@@ -50,10 +50,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Core">
-      <HintPath>..\packages\GleamTech.Core.2.4.5\lib\net40\GleamTech.Core.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Core.3.0.0\lib\net40\GleamTech.Core.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\VideoUltimate.1.7.6\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\VideoUltimate.1.8.0\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing"/>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -96,6 +96,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\**\*"/>
+    <Content Include="App_GlobalResources\**\*"/>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controllers\HomeController.Reading.cs"/>
     <Compile Include="Controllers\HomeController.Overview.cs"/>
     <Compile Include="Controllers\HomeController.cs"/>
@@ -108,7 +112,6 @@
     <Compile Include="Properties\AssemblyInfo.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ExampleFiles\MP4 Video.mp4"/>
     <Content Include="Descriptions\Overview.html"/>
     <Content Include="Descriptions\Reading.html"/>
     <Content Include="Global.asax"/>

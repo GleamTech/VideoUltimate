@@ -65,10 +65,10 @@ Namespace Controllers
                 Sub(thumbnailStream) GetAndSaveThumbnail(videoPath, thumbnailStream)
                 )
 
-		    model.ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
-		        HostingPathHelper.MapPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
-		        thumbnailCacheKey.FullValue
-		    )
+            model.ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
+                Hosting.ResolvePhysicalPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
+                thumbnailCacheKey.FullValue
+            )
 
             model.VideoInfo = GetVideoInfo(videoPath)
 

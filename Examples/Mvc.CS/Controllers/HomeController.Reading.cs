@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Web;
 using System.Web.Mvc;
 using GleamTech.AspNet;
 using GleamTech.Examples;
@@ -94,7 +93,7 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS.Controllers
             return bitmap;
         }
 
-        public static void DownloadVideoFrame(HttpContext context)
+        public static void DownloadVideoFrame(IHttpContext context)
         {
             var videoPath = ExamplesConfiguration.UnprotectString(context.Request["videoPath"]);
             var frameTime = int.Parse(context.Request["frameTime"]);

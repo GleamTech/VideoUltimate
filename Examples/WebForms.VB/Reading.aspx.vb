@@ -70,24 +70,24 @@ Public Class ReadingPage
 	    Return bitmap
 	End Function
 
-	Public Shared Sub DownloadVideoFrame(context As HttpContext)
-	    Dim videoPath = ExamplesConfiguration.UnprotectString(context.Request("videoPath"))
-	    Dim frameTime = Integer.Parse(context.Request("frameTime"))
+    Public Shared Sub DownloadVideoFrame(context As IHttpContext)
+        Dim videoPath = ExamplesConfiguration.UnprotectString(context.Request("videoPath"))
+        Dim frameTime = Integer.Parse(context.Request("frameTime"))
 
-	    Using bitmap = GetFrame(videoPath, frameTime)
-	        Using stream = New MemoryStream()
-	            bitmap.Save(stream, ImageFormat.Jpeg)
-	            stream.Position = 0
+        Using bitmap = GetFrame(videoPath, frameTime)
+            Using stream = New MemoryStream()
+                bitmap.Save(stream, ImageFormat.Jpeg)
+                stream.Position = 0
 
-	            Dim fileResponse = New FileResponse(context)
-	            fileResponse.Transmit(
-                    stream, "frame.jpg", 
-                    File.GetLastWriteTimeUtc(videoPath), 
-                    stream.Length, 
-                    neverExpires := True)
-	        End Using
-	    End Using
-	End Sub
+                Dim fileResponse = New FileResponse(context)
+                fileResponse.Transmit(
+                    stream, "frame.jpg",
+                    File.GetLastWriteTimeUtc(videoPath),
+                    stream.Length,
+                    neverExpires:=True)
+            End Using
+        End Using
+    End Sub
 
     Protected ReadOnly Property FrameDownloaderHandlerName As String
 	    Get

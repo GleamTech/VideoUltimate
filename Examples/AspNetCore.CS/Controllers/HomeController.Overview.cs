@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
+﻿using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Web.UI;
 using GleamTech.AspNet;
 using GleamTech.Caching;
 using GleamTech.Examples;
 using GleamTech.IO;
 using GleamTech.VideoUltimate;
+using GleamTech.VideoUltimateExamples.AspNetCore.CS.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace GleamTech.VideoUltimateExamples.WebForms.CS
+namespace GleamTech.VideoUltimateExamples.AspNetCore.CS.Controllers
 {
-    public partial class OverviewPage : Page
+    public partial class HomeController
     {
-        protected string ThumbnailUrl;
-        protected VideoInfoModel VideoInfo;
         private static readonly ForwardSlashPath ThumbnailCachePath = "~/App_Data/ThumbnailCache";
         private static readonly FileCache ThumbnailCache = new FileCache(ThumbnailCachePath.ToString());
 
@@ -51,9 +48,18 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
             return model;
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        public IActionResult Overview()
         {
-            var videoPath = exampleFileSelector.SelectedFile;
+            var model = new OverviewViewModel
+            {
+                ExampleFileSelector = new ExampleFileSelector
+                {
+                    Id = "exampleFileSelector",
+                    InitialFile = "MP4 Video.mp4"
+                }
+            };
+
+            var videoPath = model.ExampleFileSelector.SelectedFile;
             var fileInfo = new FileInfo(videoPath);
             var thumbnailCacheKey = new FileCacheKey(new FileCacheSourceKey(fileInfo.Name, fileInfo.Length, fileInfo.LastWriteTimeUtc), "jpg");
             var cacheItem = ThumbnailCache.GetOrAdd(
@@ -61,25 +67,14 @@ namespace GleamTech.VideoUltimateExamples.WebForms.CS
                 thumbnailStream => GetAndSaveThumbnail(videoPath, thumbnailStream)
             );
 
-            ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
+            model.ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
                 Hosting.ResolvePhysicalPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
                 thumbnailCacheKey.FullValue
             );
 
-            VideoInfo = GetVideoInfo(videoPath);
+            model.VideoInfo = GetVideoInfo(videoPath);
+
+            return View(model);
         }
-    }
-
-    public class VideoInfoModel
-    {
-        public VideoInfoModel()
-        {
-            Properties = new Dictionary<string, string>();
-            Metadata = new Dictionary<string, string>();
-        }
-
-        public Dictionary<string, string> Properties { get; }
-
-        public Dictionary<string, string> Metadata { get; }
     }
 }

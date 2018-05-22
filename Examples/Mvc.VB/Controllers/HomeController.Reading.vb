@@ -81,7 +81,7 @@ Namespace Controllers
             Return bitmap
         End Function
 
-        Public Shared Sub DownloadVideoFrame(context As HttpContext)
+        Public Shared Sub DownloadVideoFrame(context As IHttpContext)
             Dim videoPath = ExamplesConfiguration.UnprotectString(context.Request("videoPath"))
             Dim frameTime = Integer.Parse(context.Request("frameTime"))
 
@@ -92,10 +92,10 @@ Namespace Controllers
 
                     Dim fileResponse = New FileResponse(context)
                     fileResponse.Transmit(
-                        stream, "frame.jpg", 
-                        System.IO.File.GetLastWriteTimeUtc(videoPath), 
-                        stream.Length, 
-                        neverExpires := True)
+                        stream, "frame.jpg",
+                        System.IO.File.GetLastWriteTimeUtc(videoPath),
+                        stream.Length,
+                        neverExpires:=True)
                 End Using
             End Using
         End Sub

@@ -58,7 +58,7 @@ Public Class OverviewPage
 	    )
 
         ThumbnailUrl = ExamplesConfiguration.GetDownloadUrl(
-            HostingPathHelper.MapPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
+            Hosting.ResolvePhysicalPath(ThumbnailCachePath.Append(cacheItem.RelativeName)),
             thumbnailCacheKey.FullValue
         )
 

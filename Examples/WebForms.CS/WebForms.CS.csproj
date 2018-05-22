@@ -48,10 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Core">
-      <HintPath>..\packages\GleamTech.Core.2.4.5\lib\net40\GleamTech.Core.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Core.3.0.0\lib\net40\GleamTech.Core.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\VideoUltimate.1.7.6\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\VideoUltimate.1.8.0\lib\net40\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
     <Reference Include="System"/>
     <Reference Include="System.Core"/>
@@ -61,7 +61,10 @@
     <Reference Include="System.Xml"/>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ExampleFiles\MP4 Video.mp4"/>
+    <Content Include="App_Data\**\*"/>
+    <Content Include="App_GlobalResources\**\*"/>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Default.aspx"/>
     <Content Include="Descriptions\Reading.html"/>
     <Content Include="Descriptions\Overview.html"/>
