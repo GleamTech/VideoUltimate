@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 using System.Web.Routing;
+using GleamTech.AspNet;
 using GleamTech.VideoUltimate;
 
 namespace GleamTech.VideoUltimateExamples.Mvc.CS
@@ -28,9 +29,13 @@ namespace GleamTech.VideoUltimateExamples.Mvc.CS
 
             RegisterRoutes(RouteTable.Routes);
 
-            var licenseFile = Server.MapPath("~/App_Data/License.dat");
-            if (File.Exists(licenseFile))
-                VideoUltimateConfiguration.Current.LicenseKey = File.ReadAllText(licenseFile);
+            var gleamTechConfig = Hosting.ResolvePhysicalPath("~/App_Data/GleamTech.config");
+            if (File.Exists(gleamTechConfig))
+                GleamTechConfiguration.Current.Load(gleamTechConfig);
+
+            var videoUltimateConfig = Hosting.ResolvePhysicalPath("~/App_Data/VideoUltimate.config");
+            if (File.Exists(videoUltimateConfig))
+                VideoUltimateConfiguration.Current.Load(videoUltimateConfig);
         }
     }
 }

@@ -2,6 +2,7 @@
 ' visit http://go.microsoft.com/?LinkId=9394802
 Imports System.IO
 Imports GleamTech.VideoUltimate
+Imports GleamTech.AspNet
 
 Public Class MvcApplication
     Inherits System.Web.HttpApplication
@@ -26,9 +27,14 @@ Public Class MvcApplication
 
         RegisterRoutes(RouteTable.Routes)
 
-        Dim licenseFile = Server.MapPath("~/App_Data/License.dat")
-        If File.Exists(licenseFile) Then
-	        VideoUltimateConfiguration.Current.LicenseKey = File.ReadAllText(licenseFile)
+        Dim gleamTechConfig = Hosting.ResolvePhysicalPath("~/App_Data/GleamTech.config")
+        If File.Exists(gleamTechConfig) Then
+            GleamTechConfiguration.Current.Load(gleamTechConfig)
+        End If
+
+        Dim videoUltimateConfig = Hosting.ResolvePhysicalPath("~/App_Data/VideoUltimate.config")
+        If File.Exists(videoUltimateConfig) Then
+            VideoUltimateConfiguration.Current.Load(videoUltimateConfig)
         End If
     End Sub
 End Class

@@ -41,9 +41,13 @@ namespace GleamTech.VideoUltimateExamples.AspNetCore.CS
 
             app.UseGleamTech();
 
-            var licenseFile = Hosting.ResolvePhysicalPath("~/App_Data/License.dat");
-            if (File.Exists(licenseFile))
-                VideoUltimateConfiguration.Current.LicenseKey = File.ReadAllText(licenseFile);
+            var gleamTechConfig = Hosting.ResolvePhysicalPath("~/App_Data/GleamTech.config");
+            if (File.Exists(gleamTechConfig))
+                GleamTechConfiguration.Current.Load(gleamTechConfig);
+
+            var videoUltimateConfig = Hosting.ResolvePhysicalPath("~/App_Data/VideoUltimate.config");
+            if (File.Exists(videoUltimateConfig))
+                VideoUltimateConfiguration.Current.Load(videoUltimateConfig);
 
             app.UseStaticFiles();
 

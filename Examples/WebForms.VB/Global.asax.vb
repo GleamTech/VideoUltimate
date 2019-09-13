@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports GleamTech.VideoUltimate
+Imports GleamTech.AspNet
 
 Public Class Global_asax
     Inherits System.Web.HttpApplication
@@ -7,9 +8,14 @@ Public Class Global_asax
     Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when the application is started
 
-        Dim licenseFile = Server.MapPath("~/App_Data/License.dat")
-        If File.Exists(licenseFile) Then
-	        VideoUltimateConfiguration.Current.LicenseKey = File.ReadAllText(licenseFile)
+        Dim gleamTechConfig = Hosting.ResolvePhysicalPath("~/App_Data/GleamTech.config")
+        If File.Exists(gleamTechConfig) Then
+            GleamTechConfiguration.Current.Load(gleamTechConfig)
+        End If
+
+        Dim videoUltimateConfig = Hosting.ResolvePhysicalPath("~/App_Data/VideoUltimate.config")
+        If File.Exists(videoUltimateConfig) Then
+            VideoUltimateConfiguration.Current.Load(videoUltimateConfig)
         End If
     End Sub
 
