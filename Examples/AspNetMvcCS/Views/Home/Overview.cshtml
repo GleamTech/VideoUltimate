@@ -1,0 +1,44 @@
+﻿@using GleamTech.AspNet.Mvc
+@using GleamTech.Examples
+@model GleamTech.VideoUltimateExamples.AspNetMvcCS.Models.OverviewViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Overview</title>
+    <link href="@ExamplesConfiguration.GetVersionedUrl("~/resources/table.css")" rel="stylesheet" />
+</head>
+<body style="margin: 20px;">
+
+    @this.RenderBody(Model.ExampleFileSelector)
+
+    <table class="info">
+        <caption>Smart Thumbnail</caption>
+        <tr>
+            <td><img src="@Model.ThumbnailUrl" /></td>
+        </tr>
+    </table>
+
+    <table class="info">
+        <caption>Video Properties</caption>
+        @foreach (var kvp in Model.VideoInfo.Properties) {
+        <tr>
+            <th>@kvp.Key</th>
+            <td>@kvp.Value</td>
+        </tr>
+        }
+    </table>
+
+    <table class="info">
+        <caption>Video Metadata</caption>
+        @foreach (var kvp in Model.VideoInfo.Metadata) {
+        <tr>
+            <th>@kvp.Key</th>
+            <td>@kvp.Value</td>
+        </tr>
+        }
+    </table>
+
+</body>
+</html>
