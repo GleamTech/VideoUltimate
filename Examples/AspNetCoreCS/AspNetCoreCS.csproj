@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="GleamTech.Core" Version="4.0.2" />
-    <PackageReference Include="VideoUltimate" Version="2.0.2" />
+    <PackageReference Include="VideoUltimate" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
