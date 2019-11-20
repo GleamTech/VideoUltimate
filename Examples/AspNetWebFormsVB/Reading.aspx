@@ -1,5 +1,5 @@
 <%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Reading.aspx.vb" Inherits="GleamTech.VideoUltimateExamples.AspNetWebFormsVB.ReadingPage" %>
-<%@ Register TagPrefix="GleamTech" Namespace="GleamTech.Examples" Assembly="GleamTech.Core" %>
+<%@ Register TagPrefix="GleamTech" Namespace="GleamTech.Examples" Assembly="GleamTech.Common" %>
 <%@ Import Namespace="GleamTech.AspNet" %>
 
 <!DOCTYPE html>
