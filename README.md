@@ -16,8 +16,8 @@ VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer which
 
 **Note:** This project contains a fully working version of the product, however without a license key it will run in trial mode. For more information, please see [VideoUltimate: .NET Video Reader and Thumbnailer](http://www.gleamtech.com/videoultimate) product page.
 
-## Adding references to VideoUltimate assemblies
+### Adding references to VideoUltimate assemblies
 https://docs.gleamtech.com/videoultimate/html/adding-references-to-videoultimate-assemblies.htm
 
-## Using VideoUltimate in a project:
+### Using VideoUltimate in a project:
 https://docs.gleamtech.com/videoultimate/html/using-videoultimate-in-a-project.htm
