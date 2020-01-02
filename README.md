@@ -1,6 +1,6 @@
 ![VideoUltimate Logo](videoultimate-logo.png)
 # VideoUltimate: .NET Video Reader and Thumbnailer
-![Nuget](https://img.shields.io/nuget/v/GleamTech.VideoUltimate)
+[![GleamTech.VideoUltimate Nuget](https://img.shields.io/nuget/v/GleamTech.VideoUltimate)](https://www.nuget.org/packages/GleamTech.VideoUltimate/ "GleamTech.VideoUltimate Nuget")
 
 VideoUltimate is the fastest and easiest .NET Video Reader and Thumbnailer which can read any video file format on the planet. It supports .NET Core 2.0+ and .NET Framework 4.0+ web/console/desktop applications.
 
