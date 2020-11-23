@@ -22,7 +22,7 @@ function createTimeSlider(timeSliderId, videoFrameId, totalSeconds) {
     slider.noUiSlider.on('change', function() {
         var src = videoFrame.src;
         var time = Math.floor(+slider.noUiSlider.get());
-        videoFrame.src = src.substr(0, src.lastIndexOf("=") + 1) + time;
+        videoFrame.src = src.replace(/frameTime=\d*/, "frameTime=" + time);
     });
 }
 

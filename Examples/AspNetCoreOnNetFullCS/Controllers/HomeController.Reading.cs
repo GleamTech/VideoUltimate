@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -32,7 +32,7 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS.Controllers
 
             model.FrameDownloaderUrl = ExamplesConfiguration.GetDynamicDownloadUrl(
                 FrameDownloaderHandlerName,
-                new NameValueCollection
+                new Dictionary<string, string>
                 {
                     {"videoPath", ExamplesConfiguration.ProtectString(videoPath)},
                     {"version", fileInfo.LastWriteTimeUtc.Ticks + "-" + fileInfo.Length},
