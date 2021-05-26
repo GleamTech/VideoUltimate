@@ -21,7 +21,7 @@
         <caption>Current Frame</caption>
         <tr>
             <td style="text-align: center;">
-                <img id="videoFrame" src="<%=FrameDownloaderUrl%>" style="max-width: 600px;"/>
+                <img id="videoFrame" src="<%:FrameDownloaderUrl%>" style="max-width: 600px;"/>
             </td>
         </tr>
         <tr>
