@@ -24,3 +24,6 @@ https://docs.gleamtech.com/videoultimate/html/adding-references-to-videoultimate
 
 ### Using VideoUltimate in a project:
 https://docs.gleamtech.com/videoultimate/html/using-videoultimate-in-a-project.htm
+
+### Showcase videos:
+[![.NET Video Reader and Thumbnailer](https://i.ytimg.com/vi/Jib7p1Dxut0/maxresdefault.jpg)](https://youtu.be/Jib7p1Dxut0 ".NET Video Reader and Thumbnailer")
