@@ -1,8 +1,8 @@
-﻿Imports System.Drawing.Imaging
-Imports System.Globalization
+﻿Imports System.Globalization
 Imports System.IO
 Imports GleamTech.AspNet
 Imports GleamTech.Caching
+Imports GleamTech.Drawing
 Imports GleamTech.Examples
 Imports GleamTech.IO
 Imports GleamTech.VideoUltimate
@@ -18,7 +18,7 @@ Namespace Controllers
 	    Private Shared Sub GetAndSaveThumbnail(videoPath As String, thumbnailStream As Stream)
 	        Using videoThumbnailer = New VideoThumbnailer(videoPath)
 	            Using thumbnail = videoThumbnailer.GenerateThumbnail(300)
-	                thumbnail.Save(thumbnailStream, ImageFormat.Jpeg)
+	                thumbnail.Save(thumbnailStream, ImageFormat.Jpg)
 	            End Using
 	        End Using
 	    End Sub

@@ -1,8 +1,8 @@
-﻿using System.Drawing.Imaging;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using GleamTech.AspNet;
 using GleamTech.Caching;
+using GleamTech.Drawing;
 using GleamTech.Examples;
 using GleamTech.IO;
 using GleamTech.VideoUltimate;
@@ -20,7 +20,7 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS.Controllers
         {
             using (var videoThumbnailer = new VideoThumbnailer(videoPath))
             using (var thumbnail = videoThumbnailer.GenerateThumbnail(300))
-                thumbnail.Save(thumbnailStream, ImageFormat.Jpeg);
+                thumbnail.Save(thumbnailStream, ImageFormat.Jpg);
         }
 
         private static VideoInfoModel GetVideoInfo(string videoPath)

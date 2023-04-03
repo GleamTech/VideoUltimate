@@ -1,8 +1,7 @@
-﻿Imports System.Drawing
-Imports System.Drawing.Imaging
-Imports System.Globalization
+﻿Imports System.Globalization
 Imports System.IO
 Imports GleamTech.AspNet
+Imports GleamTech.Drawing
 Imports GleamTech.Examples
 Imports GleamTech.VideoUltimate
 
@@ -18,7 +17,7 @@ Public Class ReadingPage
 
 		FrameDownloaderUrl = ExamplesConfiguration.GetDynamicDownloadUrl(
             FrameDownloaderHandlerName, 
-            New NameValueCollection() From {
+            New Dictionary(Of String, String) From {
 			    {"videoPath", ExamplesConfiguration.ProtectString(videoPath)},
 			    {"version", fileInfo.LastWriteTimeUtc.Ticks.ToString() + "-" + fileInfo.Length.ToString()},
 			    {"frameTime", "0"}
@@ -34,7 +33,7 @@ Public Class ReadingPage
 	    End Using
 	End Function
 
-	Public Shared Function GetFrame(videoPath As String, frameTime As Double) As Bitmap
+	Public Shared Function GetFrame(videoPath As String, frameTime As Double) As Image
 	    Using videoFrameReader = New VideoFrameReader(videoPath)
 	        If frameTime > 0 Then
 	            videoFrameReader.Seek(frameTime)
@@ -50,33 +49,28 @@ Public Class ReadingPage
 	    End Using
 	End Function
 
-	Public Shared Function GetErrorFrame(width As Integer, height As Integer, [error] As String) As Bitmap
-	    Dim bitmap = New Bitmap(width, height)
+	Public Shared Function GetErrorFrame(width As Integer, height As Integer, [error] As String) As Image
+		Dim image As Object = New Image(width, height, Color.Black)
 
-	    Using _graphics = Graphics.FromImage(bitmap)
-	        _graphics.Clear(Color.Black)
+		'0 to use AutoFontSize
+		image.DrawTextOverlay(
+			[error], 
+			New Font("Arial", FontStyle.Bold, 0), 
+			New Point(0, 0), 
+			New TextOverlayOptions() With {
+				.AutoFontSize = 0.1F
+			})
 
-	        _graphics.DrawString(
-	            [error], 
-	            New Font(FontFamily.GenericSansSerif, 12), 
-	            New SolidBrush(Color.White), 
-	            New RectangleF(0, 0, width, height), 
-	            New StringFormat() With { 
-	                                .Alignment = StringAlignment.Center, 
-	                                .LineAlignment = StringAlignment.Center 
-	                                })
-	    End Using
-
-	    Return bitmap
+		Return image
 	End Function
 
     Public Shared Sub DownloadVideoFrame(context As IHttpContext)
         Dim videoPath = ExamplesConfiguration.UnprotectString(context.Request("videoPath"))
         Dim frameTime = Integer.Parse(context.Request("frameTime"))
 
-        Using bitmap = GetFrame(videoPath, frameTime)
+        Using image = GetFrame(videoPath, frameTime)
             Using stream = New MemoryStream()
-                bitmap.Save(stream, ImageFormat.Jpeg)
+                image.Save(stream, ImageFormat.Jpg)
                 stream.Position = 0
 
                 Dim fileResponse = New FileResponse(context)

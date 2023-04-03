@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using GleamTech.AspNet;
+using GleamTech.Drawing;
 using GleamTech.Examples;
 using GleamTech.VideoUltimate;
 using GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS.Models;
@@ -54,7 +53,7 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS.Controllers
             }
         }
 
-        public static Bitmap GetFrame(string videoPath, double frameTime)
+        public static Image GetFrame(string videoPath, double frameTime)
         {
             using (var videoFrameReader = new VideoFrameReader(videoPath))
             {
@@ -70,38 +69,32 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS.Controllers
             }
         }
 
-        public static Bitmap GetErrorFrame(int width, int height, string error)
+        public static Image GetErrorFrame(int width, int height, string error)
         {
-            var bitmap = new Bitmap(width, height);
+	        var image = new Image(width, height, Color.Black);
 
-            using (var graphics = Graphics.FromImage(bitmap))
-            {
-                graphics.Clear(Color.Black);
+	        image.DrawTextOverlay(
+		        error,
+		        new Font("Arial", FontStyle.Bold, 0), //0 to use AutoFontSize
+		        new Point(0, 0),
+		        new TextOverlayOptions
+		        {
+			        AutoFontSize = 0.1f
+		        }
+	        );
 
-                graphics.DrawString(
-                    error,
-                    new Font(FontFamily.GenericSansSerif, 12),
-                    new SolidBrush(Color.White),
-                    new RectangleF(0, 0, width, height),
-                    new StringFormat
-                    {
-                        Alignment = StringAlignment.Center,
-                        LineAlignment = StringAlignment.Center
-                    });
-            }
-
-            return bitmap;
+	        return image;
         }
 
-        public static void DownloadVideoFrame(IHttpContext context)
+		public static void DownloadVideoFrame(IHttpContext context)
         {
             var videoPath = ExamplesConfiguration.UnprotectString(context.Request["videoPath"]);
             var frameTime = int.Parse(context.Request["frameTime"]);
 
-            using (var bitmap = GetFrame(videoPath, frameTime))
+            using (var image = GetFrame(videoPath, frameTime))
             using (var stream = new MemoryStream())
             {
-                bitmap.Save(stream, ImageFormat.Jpeg);
+                image.Save(stream, ImageFormat.Jpg);
                 stream.Position = 0;
 
                 var fileResponse = new FileResponse(context);
