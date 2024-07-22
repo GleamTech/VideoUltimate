@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.IO;
 using GleamTech.AspNet;
 using GleamTech.Caching;

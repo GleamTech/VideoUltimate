@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -71,22 +71,22 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS.Controllers
 
         public static Image GetErrorFrame(int width, int height, string error)
         {
-	        var image = new Image(width, height, Color.Black);
+            var image = new Image(width, height, Color.Black);
 
-	        image.DrawTextOverlay(
-		        error,
-		        new Font("Arial", FontStyle.Bold, 0), //0 to use AutoFontSize
-		        new Point(0, 0),
-		        new TextOverlayOptions
-		        {
-			        AutoFontSize = 0.1f
-		        }
-	        );
+            image.DrawTextOverlay(
+                error,
+                new Font("Arial", FontStyle.Bold, 0), //0 to use AutoFontSize
+                new Point(0, 0),
+                new TextOverlayOptions
+                {
+                    AutoFontSize = 0.1f
+                }
+            );
 
-	        return image;
+            return image;
         }
 
-		public static void DownloadVideoFrame(IHttpContext context)
+        public static void DownloadVideoFrame(IHttpContext context)
         {
             var videoPath = ExamplesConfiguration.UnprotectString(context.Request["videoPath"]);
             var frameTime = int.Parse(context.Request["frameTime"]);

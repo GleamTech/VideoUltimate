@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,15 +35,15 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreOnNetFullCS
             //Register GleamTech to the ASP.NET Core HTTP request pipeline.
             app.UseGleamTech(() =>
             {
-	            //The below custom config file loading is only for our demo publishing purpose:
+                //The below custom config file loading is only for our demo publishing purpose:
 
-	            var gleamTechConfig = Hosting.ResolvePhysicalPath("~/App_Data/GleamTech.config");
-	            if (File.Exists(gleamTechConfig))
-	                GleamTechConfiguration.Current.Load(gleamTechConfig);
+                var gleamTechConfig = Hosting.ResolvePhysicalPath("~/App_Data/GleamTech.config");
+                if (File.Exists(gleamTechConfig))
+                    GleamTechConfiguration.Current.Load(gleamTechConfig);
 
-	            var videoUltimateConfig = Hosting.ResolvePhysicalPath("~/App_Data/VideoUltimate.config");
-	            if (File.Exists(videoUltimateConfig))
-	                VideoUltimateConfiguration.Current.Load(videoUltimateConfig);
+                var videoUltimateConfig = Hosting.ResolvePhysicalPath("~/App_Data/VideoUltimate.config");
+                if (File.Exists(videoUltimateConfig))
+                    VideoUltimateConfiguration.Current.Load(videoUltimateConfig);
             });
             //----------------------
 

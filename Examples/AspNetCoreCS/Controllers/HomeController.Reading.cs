@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -74,13 +74,13 @@ namespace GleamTech.VideoUltimateExamples.AspNetCoreCS.Controllers
             var image = new Image(width, height, Color.Black);
 
             image.DrawTextOverlay(
-	            error,
-	            new Font("Arial", FontStyle.Bold, 0), //0 to use AutoFontSize
-	            new Point(0, 0),
-	            new TextOverlayOptions
-	            {
-		            AutoFontSize = 0.1f
-	            }
+                error,
+                new Font("Arial", FontStyle.Bold, 0), //0 to use AutoFontSize
+                new Point(0, 0),
+                new TextOverlayOptions
+                {
+                    AutoFontSize = 0.1f
+                }
             );
 
             return image;

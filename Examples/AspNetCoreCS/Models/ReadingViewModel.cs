@@ -1,4 +1,4 @@
-﻿using GleamTech.AspNet;
+using GleamTech.AspNet;
 using GleamTech.Examples;
 
 namespace GleamTech.VideoUltimateExamples.AspNetCoreCS.Models
