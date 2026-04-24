@@ -26,8 +26,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <Use64BitIISExpress />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,7 +35,6 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>GleamTech.VideoUltimateExamples.AspNetWebFormsVB.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
     <Prefer32Bit>false</Prefer32Bit>
@@ -46,7 +45,6 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>GleamTech.VideoUltimateExamples.AspNetWebFormsVB.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
     <Prefer32Bit>false</Prefer32Bit>
@@ -65,11 +63,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Common">
-      <HintPath>..\packages\GleamTech.Common.7.0.0\lib\net472\GleamTech.Common.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Common.7.1.0\lib\net472\GleamTech.Common.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\GleamTech.VideoUltimate.5.0.0\lib\net472\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\GleamTech.VideoUltimate.5.1.0\lib\net472\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -103,21 +103,12 @@
     <Import Include="System.Web.UI.WebControls.WebParts" />
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(DisableWildcardExpansionHack)' != 'true'">
     <Content Include="App_Data\**\*" />
     <Content Include="App_GlobalResources\**\*" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Default.aspx" />
-    <Content Include="Descriptions\Overview.html" />
-    <Content Include="Descriptions\Reading.html" />
-    <Content Include="Overview.aspx" />
+    <Content Include="Descriptions\**\*" />
+    
     <Content Include="Global.asax" />
-    <Content Include="Reading.aspx" />
-    <Content Include="Resources\nouislider.min.css" />
-    <Content Include="Resources\nouislider.min.js" />
-    <Content Include="Resources\Table.css" />
-    <Content Include="Resources\TimeSlider.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -125,22 +116,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Default.aspx" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Default.aspx.vb">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.designer.vb">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Overview.aspx.designer.vb">
-      <DependentUpon>Overview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Overview.aspx.vb">
-      <DependentUpon>Overview.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
+  <ItemGroup Condition="'$(DisableWildcardExpansionHack)' != 'true'">
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +141,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Default.aspx.vb">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Overview.aspx" />
+    <Content Include="Reading.aspx" />
+    <Content Include="Resources\nouislider.min.css" />
+    <Content Include="Resources\nouislider.min.js" />
+    <Content Include="Resources\Table.css" />
+    <Content Include="Resources\TimeSlider.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Overview.aspx.designer.vb">
+      <DependentUpon>Overview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Overview.aspx.vb">
+      <DependentUpon>Overview.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Reading.aspx.designer.vb">
       <DependentUpon>Reading.aspx</DependentUpon>
@@ -191,7 +193,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -210,7 +211,8 @@
           <IISUrl>http://localhost:5211/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl></CustomServerUrl>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
