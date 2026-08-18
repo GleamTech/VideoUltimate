@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GleamTech.Common">
-      <HintPath>..\packages\GleamTech.Common.7.2.0\lib\net472\GleamTech.Common.dll</HintPath>
+      <HintPath>..\packages\GleamTech.Common.7.4.0\lib\net472\GleamTech.Common.dll</HintPath>
     </Reference>
     <Reference Include="GleamTech.VideoUltimate">
-      <HintPath>..\packages\GleamTech.VideoUltimate.5.2.0\lib\net472\GleamTech.VideoUltimate.dll</HintPath>
+      <HintPath>..\packages\GleamTech.VideoUltimate.5.4.0\lib\net472\GleamTech.VideoUltimate.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +111,10 @@
     <Content Include="Descriptions\**\*" />
     <Content Include="Models\**\*" />
     <Content Include="Views\**\*" />
+    <Content Include="Resources\nouislider.min.css" />
+    <Content Include="Resources\nouislider.min.js" />
+    <Content Include="Resources\Table.css" />
+    <Content Include="Resources\TimeSlider.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
